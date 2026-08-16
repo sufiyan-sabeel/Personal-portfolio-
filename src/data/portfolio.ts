@@ -2,39 +2,20 @@ import { Project, SkillCategory } from '../types';
 
 export const PERSONAL_INFO = {
   name: 'Umaiz Sufiyan',
-  monogram: 'US.',
-  title: 'Student Developer & AI Builder',
-  role: 'Developer • AI Builder • Technology Enthusiast',
-  tagline: 'Building intelligent software, AI-powered experiences, and experimental digital products.',
-  status: 'Open to Collaborations & Projects',
-  location: 'Global / Remote',
+  websiteTitle: 'vault portfolio - Umaiz Sufiyan an developer',
+  role: 'Student Developer • AI Builder',
+  title: 'Student Developer / AI Builder',
+  eyebrow: 'VAULT PORTFOLIO — UMAIZ SUFIYAN AN DEVELOPER',
+  mainStatement: 'Building intelligent software and digital experiences.',
+  supportingText: 'I explore AI, software development, automation, and modern digital products.',
   githubUsername: 'sufiyan-sabeel',
   githubUrl: 'https://github.com/sufiyan-sabeel',
   instagramUsername: '@umaizsufiyan.78',
   instagramUrl: 'https://instagram.com/umaizsufiyan.78',
-  portraitImage: '/src/assets/images/umaiz_portrait_1786864188838.jpg',
+  portraitImage: '/src/assets/images/developer_suit_portrait_1786898335371.jpg',
   about: {
-    heading: 'BUILDING WITH CURIOSITY.',
-    subheading: 'Student Developer & AI Solutions Enthusiast',
-    bio: [
-      "I am a student developer driven by an innate fascination for how software and artificial intelligence intersect to solve real problems. My journey is centered around exploring cutting-edge computing paradigms, building functional applications, and experimenting with emerging technologies.",
-      "From crafting responsive web applications to engineering AI workflows, developer automation utilities, and exploring mobile architectures, I focus on clean code, thoughtful user experience, and practical engineering solutions."
-    ],
-    focusMetrics: [
-      { label: 'FOCUS', value: 'AI + Software', description: 'Intelligent systems & software engineering' },
-      { label: 'BUILDING', value: 'Digital Products', description: 'Practical apps & modern interfaces' },
-      { label: 'INTEREST', value: 'Future Technology', description: 'Autonomous agents & experimental tech' },
-      { label: 'APPROACH', value: 'Continuous Learning', description: 'Curiosity-led technical exploration' },
-    ],
-    interests: [
-      'Artificial Intelligence & Machine Learning',
-      'Full-Stack Web Engineering',
-      'Android & Mobile App Architecture',
-      'Workflow Automation & Scripting',
-      'Developer Tooling & Productivity',
-      'Generative AI & Agentic Systems',
-      'Experimental UI & Cinematic Design'
-    ]
+    title: 'ABOUT',
+    bio: "I'm Umaiz Sufiyan, a student developer exploring AI, software, automation, and modern digital experiences. I enjoy turning ideas into working technology."
   }
 };
 
@@ -45,7 +26,7 @@ export const PROJECTS_DATA: Project[] = [
     category: 'AI',
     description: 'An experimental framework for chaining multi-turn AI reasoning tasks, context memory retrieval, and structured tool orchestration.',
     highlight: 'Multi-agent coordination and contextual task execution',
-    technologies: ['TypeScript', 'Generative AI', 'Node.js', 'API Integration'],
+    technologies: ['TypeScript', 'Generative AI', 'Node.js', 'APIs'],
     status: 'Active',
     githubUrl: 'https://github.com/sufiyan-sabeel',
     demoUrl: '#',
@@ -53,9 +34,9 @@ export const PROJECTS_DATA: Project[] = [
   },
   {
     id: 'modern-web-platform',
-    title: 'Cinematic Web Application Framework',
+    title: 'Cinematic Web Application',
     category: 'Web',
-    description: 'A high-performance modern web application featuring responsive dual-tone atmospheric UI, reactive state management, and smooth micro-interactions.',
+    description: 'A high-performance modern web application featuring responsive dark atmospheric UI, reactive state management, and smooth micro-interactions.',
     highlight: 'Sub-60fps fluid UI transitions and component modularity',
     technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Motion'],
     status: 'Completed',
@@ -69,7 +50,7 @@ export const PROJECTS_DATA: Project[] = [
     category: 'Tools',
     description: 'A modular CLI and automation toolkit designed to streamline repetitive coding workflows, linting verification, and API testing.',
     highlight: 'Accelerated development cycles and automated scripts',
-    technologies: ['JavaScript', 'Node.js', 'Git Automation', 'REST APIs'],
+    technologies: ['JavaScript', 'Node.js', 'Git', 'APIs'],
     status: 'In Progress',
     githubUrl: 'https://github.com/sufiyan-sabeel',
     demoUrl: '#',
@@ -77,11 +58,11 @@ export const PROJECTS_DATA: Project[] = [
   },
   {
     id: 'mobile-app-concept',
-    title: 'Android & Cross-Platform Experiment',
+    title: 'Mobile Architecture & UI Experiment',
     category: 'Mobile',
-    description: 'Exploratory mobile interface leveraging native device capabilities, clean architecture patterns, and offline-first state synchronization.',
+    description: 'Exploratory mobile interface leveraging reactive state machines, clean component architecture, and responsive gesture handling.',
     highlight: 'Adaptive layouts and smooth gesture handling',
-    technologies: ['Android', 'Mobile UI', 'APIs', 'State Machine'],
+    technologies: ['React Native / Mobile UI', 'TypeScript', 'APIs'],
     status: 'Prototype',
     githubUrl: 'https://github.com/sufiyan-sabeel',
     demoUrl: '#',
@@ -93,41 +74,34 @@ export const SKILLS_DATA: SkillCategory[] = [
   {
     id: 'development',
     title: 'DEVELOPMENT',
-    subtitle: 'Core programming languages and frontend ecosystems',
+    subtitle: 'Core programming languages & frontend frameworks',
     skills: [
-      { name: 'JavaScript', tag: 'ES6+' },
-      { name: 'TypeScript', tag: 'Typed JS' },
-      { name: 'React', tag: 'UI Library' },
-      { name: 'HTML5', tag: 'Semantic' },
-      { name: 'CSS3', tag: 'Modern Styling' },
-      { name: 'Tailwind CSS', tag: 'Utility-first' },
-      { name: 'Node.js', tag: 'Runtime' }
+      { name: 'React' },
+      { name: 'TypeScript' },
+      { name: 'JavaScript' },
+      { name: 'HTML' },
+      { name: 'CSS' }
     ]
   },
   {
     id: 'ai',
-    title: 'AI & INTELLIGENCE',
-    subtitle: 'Machine learning concepts, generative models, and agent architectures',
+    title: 'AI',
+    subtitle: 'Machine intelligence & generative workflows',
     skills: [
-      { name: 'Artificial Intelligence', tag: 'Core Concepts' },
-      { name: 'AI Applications', tag: 'Practical Systems' },
-      { name: 'AI Agents', tag: 'Autonomous Logic' },
-      { name: 'Generative AI', tag: 'LLMs & Diffusion' },
-      { name: 'Prompt Engineering', tag: 'Context Design' },
-      { name: 'LLM Integration', tag: 'API Workflows' }
+      { name: 'Artificial Intelligence' },
+      { name: 'Generative AI' },
+      { name: 'AI Applications' },
+      { name: 'AI Agents' }
     ]
   },
   {
     id: 'tools',
-    title: 'TOOLS & ECOSYSTEM',
-    subtitle: 'Version control, developer utilities, and deployment workflows',
+    title: 'TOOLS',
+    subtitle: 'Version control & integration interfaces',
     skills: [
-      { name: 'Git', tag: 'Version Control' },
-      { name: 'GitHub', tag: 'Collaboration' },
-      { name: 'REST APIs', tag: 'Integration' },
-      { name: 'Developer Tools', tag: 'DevEx' },
-      { name: 'Vite', tag: 'Build Tooling' },
-      { name: 'VS Code', tag: 'Editor & Config' }
+      { name: 'Git' },
+      { name: 'GitHub' },
+      { name: 'APIs' }
     ]
   }
 ];

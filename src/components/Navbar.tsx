@@ -1,39 +1,33 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ArrowUpRight, Sparkles } from 'lucide-react';
-import { LiveClock } from './LiveClock';
+import { Menu, X, ArrowUpRight, Github } from 'lucide-react';
 import { PERSONAL_INFO } from '../data/portfolio';
 
-const NAV_ITEMS = [
-  { label: 'Home', href: '#home' },
-  { label: 'About', href: '#about' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Skills', href: '#skills' },
-  { label: 'GitHub', href: '#github' },
-  { label: 'Contact', href: '#contact' },
-];
-
 export const Navbar: React.FC = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState('home');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setIsScrolled(true);
+      if (window.scrollY > 40) {
+        setScrolled(true);
       } else {
-        setIsScrolled(false);
+        setScrolled(false);
       }
 
-      // Active section detection
-      const sections = NAV_ITEMS.map((item) => item.href.substring(1));
-      const scrollPosition = window.scrollY + 200;
+      // Track active section
+      const sections = ['home', 'about', 'projects', 'skills', 'contact'];
+      const scrollPosition = window.scrollY + 180;
 
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const section = document.getElementById(sections[i]);
-        if (section && section.offsetTop <= scrollPosition) {
-          setActiveSection(sections[i]);
-          break;
+      for (const section of sections) {
+        const el = document.getElementById(section);
+        if (el) {
+          const top = el.offsetTop;
+          const height = el.offsetHeight;
+          if (scrollPosition >= top && scrollPosition < top + height) {
+            setActiveSection(section);
+            break;
+          }
         }
       }
     };
@@ -42,16 +36,24 @@ export const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const navItems = [
+    { label: 'Home', id: 'home' },
+    { label: 'About', id: 'about' },
+    { label: 'Projects', id: 'projects' },
+    { label: 'GitHub', id: 'github' },
+    { label: 'Skills', id: 'skills' },
+    { label: 'Contact', id: 'contact' },
+  ];
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     e.preventDefault();
     setMobileMenuOpen(false);
-    const targetId = href.substring(1);
+    setActiveSection(targetId);
     const elem = document.getElementById(targetId);
     if (elem) {
       const navOffset = 80;
       const elementPosition = elem.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - navOffset;
-
       window.scrollTo({
         top: offsetPosition,
         behavior: 'smooth',
@@ -60,105 +62,99 @@ export const Navbar: React.FC = () => {
   };
 
   return (
-    <header
-      id="main-navigation"
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-        isScrolled
-          ? 'py-3 bg-[#030712]/80 backdrop-blur-md border-b border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.5)]'
-          : 'py-5 bg-transparent'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-        {/* Brand Logo */}
+    <header className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-8 lg:px-12 pt-4 transition-all duration-300">
+      <div
+        className={`max-w-7xl mx-auto rounded-xl px-5 py-3 flex items-center justify-between transition-all duration-300 ${
+          scrolled
+            ? 'bg-[#060913]/90 backdrop-blur-md border border-white/15 shadow-lg shadow-black/40'
+            : 'bg-white/[0.04] backdrop-blur-sm border border-white/10'
+        }`}
+      >
+        {/* Left: Brand Identity */}
         <a
           href="#home"
-          onClick={(e) => handleNavClick(e, '#home')}
-          className="group flex items-center gap-3 text-white font-display tracking-tight text-2xl font-bold"
+          onClick={(e) => handleNavClick(e, 'home')}
+          className="text-lg sm:text-xl font-bold font-display tracking-tight text-white hover:text-cyan-400 transition-colors flex items-center gap-2 group"
           id="nav-brand-logo"
         >
-          <div className="text-2xl font-bold tracking-tighter">
-            UMAIZ<span className="text-cyan-400">.</span>
-          </div>
+          <span className="w-2 h-2 rounded-full bg-cyan-400 group-hover:scale-125 transition-transform" />
+          <span>vault portfolio - umaiz sufiyan</span>
         </a>
 
-        {/* Desktop Navigation Links */}
-        <nav className="hidden md:flex items-center space-x-8 text-xs font-medium tracking-[0.2em] uppercase opacity-75">
-          {NAV_ITEMS.map((item) => {
-            const isActive = activeSection === item.href.substring(1);
+        {/* Center: Desktop Navigation Links */}
+        <nav className="hidden md:flex items-center gap-1 sm:gap-2">
+          {navItems.map((item) => {
+            const isActive = activeSection === item.id;
             return (
               <a
-                key={item.href}
-                href={item.href}
-                onClick={(e) => handleNavClick(e, item.href)}
-                className={`transition-all duration-200 hover:opacity-100 ${
+                key={item.id}
+                href={`#${item.id}`}
+                onClick={(e) => handleNavClick(e, item.id)}
+                className={`relative px-3.5 py-1.5 rounded-lg text-xs font-mono uppercase tracking-wider transition-all duration-200 ${
                   isActive
-                    ? 'text-cyan-400 opacity-100 font-semibold'
-                    : 'text-white hover:text-cyan-300'
+                    ? 'text-cyan-400 font-semibold bg-white/5'
+                    : 'text-gray-300 hover:text-white hover:bg-white/[0.03]'
                 }`}
               >
                 {item.label}
+                {isActive && (
+                  <span className="absolute bottom-0 left-3.5 right-3.5 h-0.5 bg-cyan-400 rounded-full" />
+                )}
               </a>
             );
           })}
         </nav>
 
-        {/* Right CTA & Live Clock */}
-        <div className="hidden md:flex items-center gap-4">
-          <LiveClock variant="badge" />
-
+        {/* Right: GitHub Direct CTA & Mobile Toggle */}
+        <div className="flex items-center gap-3">
           <a
-            href="#contact"
-            onClick={(e) => handleNavClick(e, '#contact')}
-            id="nav-cta-talk"
-            className="glass px-6 py-2.5 rounded-full text-xs font-bold tracking-widest uppercase text-white hover:bg-white hover:text-black transition-all duration-200"
+            href={PERSONAL_INFO.githubUrl}
+            target="_blank"
+            rel="noreferrer"
+            id="nav-github-btn"
+            className="hidden sm:inline-flex items-center gap-1.5 text-xs font-mono font-bold text-black bg-white hover:bg-cyan-400 transition-all duration-200 px-4 py-2 rounded-lg shadow-sm hover:shadow-cyan-400/20 whitespace-nowrap min-h-[36px]"
           >
-            Let's Talk →
+            <Github className="w-3.5 h-3.5" />
+            <span>GitHub →</span>
           </a>
-        </div>
 
-        {/* Mobile Menu Toggle */}
-        <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden p-2 rounded-lg bg-slate-900 border border-white/10 text-slate-300 hover:text-white"
-          aria-label="Toggle navigation menu"
-          id="mobile-menu-btn"
-        >
-          {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-        </button>
+          {/* Mobile hamburger */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden p-2 text-gray-300 hover:text-white rounded-lg hover:bg-white/10 transition-colors"
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? <X className="w-5 h-5 text-white" /> : <Menu className="w-5 h-5" />}
+          </button>
+        </div>
       </div>
 
-      {/* Mobile Dropdown Drawer */}
+      {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div
-          id="mobile-menu-drawer"
-          className="md:hidden mt-2 mx-4 p-5 rounded-2xl glass-panel border border-cyan-500/20 shadow-2xl flex flex-col gap-4 animate-in fade-in slide-in-from-top-4 duration-200"
-        >
-          <div className="flex flex-col gap-2">
-            {NAV_ITEMS.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                onClick={(e) => handleNavClick(e, item.href)}
-                className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-colors ${
-                  activeSection === item.href.substring(1)
-                    ? 'bg-cyan-500/15 text-cyan-300 border border-cyan-500/30'
-                    : 'text-slate-300 hover:bg-white/5 hover:text-white'
-                }`}
-              >
-                {item.label}
-              </a>
-            ))}
-          </div>
-
-          <div className="pt-3 border-t border-white/10 flex flex-col gap-3">
-            <LiveClock variant="hero" />
+        <div className="md:hidden mt-2 p-4 bg-[#060913]/95 backdrop-blur-xl border border-white/15 rounded-xl shadow-2xl flex flex-col gap-2 animate-in fade-in slide-in-from-top-2 duration-200">
+          {navItems.map((item) => (
             <a
-              href="#contact"
-              onClick={(e) => handleNavClick(e, '#contact')}
-              className="flex items-center justify-center gap-2 w-full py-3 rounded-xl text-xs font-semibold text-white bg-gradient-to-r from-blue-600 to-cyan-600 shadow-md"
+              key={item.id}
+              href={`#${item.id}`}
+              onClick={(e) => handleNavClick(e, item.id)}
+              className={`px-4 py-2.5 rounded-lg text-sm font-mono tracking-wider transition-colors ${
+                activeSection === item.id
+                  ? 'text-cyan-400 font-bold bg-white/10'
+                  : 'text-gray-300 hover:text-white hover:bg-white/5'
+              }`}
             >
-              <span>Let's Talk</span>
-              <ArrowUpRight className="w-4 h-4" />
+              {item.label}
+            </a>
+          ))}
+          <div className="pt-3 mt-1 border-t border-white/10 flex flex-col gap-2">
+            <a
+              href={PERSONAL_INFO.githubUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center justify-center gap-2 px-4 py-3 rounded-lg text-xs font-mono font-bold text-black bg-white hover:bg-cyan-400 transition-colors w-full"
+            >
+              <Github className="w-4 h-4" />
+              <span>GitHub →</span>
             </a>
           </div>
         </div>
