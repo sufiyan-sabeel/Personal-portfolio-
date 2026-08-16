@@ -73,25 +73,16 @@ export const Navbar: React.FC = () => {
         <a
           href="#home"
           onClick={(e) => handleNavClick(e, '#home')}
-          className="group flex items-center gap-2.5 text-slate-100 font-display tracking-tight text-lg sm:text-xl font-bold"
+          className="group flex items-center gap-3 text-white font-display tracking-tight text-2xl font-bold"
           id="nav-brand-logo"
         >
-          <div className="relative flex items-center justify-center w-9 h-9 rounded-lg bg-slate-900 border border-white/10 group-hover:border-cyan-400/50 transition-colors shadow-inner">
-            <span className="font-mono text-cyan-400 font-black text-sm tracking-tighter">US</span>
-            <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-orange-500 shadow-[0_0_8px_#f97316]"></span>
-          </div>
-          <div className="flex flex-col">
-            <span className="leading-tight group-hover:text-cyan-300 transition-colors">
-              UMAIZ <span className="text-cyan-400 font-mono">.</span>
-            </span>
-            <span className="font-mono text-[9px] uppercase tracking-widest text-slate-400 leading-none">
-              Dev & AI
-            </span>
+          <div className="text-2xl font-bold tracking-tighter">
+            UMAIZ<span className="text-cyan-400">.</span>
           </div>
         </a>
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden md:flex items-center gap-1 p-1 rounded-full bg-slate-900/60 border border-white/10 backdrop-blur-md">
+        <nav className="hidden md:flex items-center space-x-8 text-xs font-medium tracking-[0.2em] uppercase opacity-75">
           {NAV_ITEMS.map((item) => {
             const isActive = activeSection === item.href.substring(1);
             return (
@@ -99,33 +90,29 @@ export const Navbar: React.FC = () => {
                 key={item.href}
                 href={item.href}
                 onClick={(e) => handleNavClick(e, item.href)}
-                className={`relative px-4 py-1.5 rounded-full text-xs font-medium transition-all duration-200 ${
+                className={`transition-all duration-200 hover:opacity-100 ${
                   isActive
-                    ? 'text-cyan-300 bg-white/10 shadow-sm border border-cyan-400/30'
-                    : 'text-slate-400 hover:text-slate-100 hover:bg-white/5'
+                    ? 'text-cyan-400 opacity-100 font-semibold'
+                    : 'text-white hover:text-cyan-300'
                 }`}
               >
                 {item.label}
-                {isActive && (
-                  <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_8px_#06b6d4]"></span>
-                )}
               </a>
             );
           })}
         </nav>
 
         {/* Right CTA & Live Clock */}
-        <div className="hidden md:flex items-center gap-3">
+        <div className="hidden md:flex items-center gap-4">
           <LiveClock variant="badge" />
 
           <a
             href="#contact"
             onClick={(e) => handleNavClick(e, '#contact')}
             id="nav-cta-talk"
-            className="group relative inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold text-white bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 shadow-[0_0_20px_rgba(37,99,235,0.35)] transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] border border-cyan-400/30"
+            className="glass px-6 py-2.5 rounded-full text-xs font-bold tracking-widest uppercase text-white hover:bg-white hover:text-black transition-all duration-200"
           >
-            <span>Let's Talk</span>
-            <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            Let's Talk →
           </a>
         </div>
 

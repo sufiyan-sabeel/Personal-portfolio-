@@ -19,40 +19,33 @@ export const Skills: React.FC = () => {
   };
 
   return (
-    <section id="skills" className="relative py-24 bg-[#030712] overflow-hidden">
-      {/* Background ambient accents */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute top-1/2 left-1/3 w-[450px] h-[450px] bg-cyan-600/10 rounded-full blur-[160px]" />
-      </div>
-
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
+    <section id="skills" className="relative py-24 bg-[#02040a] overflow-hidden">
+      <div className="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 z-10">
         
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
           <div>
-            <div className="flex items-center gap-2 px-3 py-1 rounded-full glass-panel-subtle border border-cyan-500/30 w-fit mb-3">
-              <Terminal className="w-3.5 h-3.5 text-cyan-400" />
-              <span className="font-mono text-[11px] uppercase tracking-widest text-cyan-300 font-semibold">
-                TECHNICAL CAPABILITIES
-              </span>
+            <div className="flex items-center space-x-2 text-[10px] uppercase tracking-[0.3em] font-mono text-cyan-400 font-bold mb-1">
+              <div className="w-1.5 h-1.5 rounded-full bg-cyan-400"></div>
+              <span>Technical Capabilities</span>
             </div>
             
-            <h2 className="text-3xl sm:text-5xl font-black font-display tracking-tight text-white uppercase">
+            <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-white font-display">
               SKILLS & ARSENAL
             </h2>
-            <p className="font-mono text-xs uppercase tracking-widest text-slate-400 mt-2">
+            <p className="font-mono text-xs uppercase tracking-widest text-gray-400 mt-2">
               VERIFIED CORE COMPETENCIES & DEVELOPMENT TECHNOLOGIES
             </p>
           </div>
 
           {/* Category Filter */}
-          <div className="flex items-center gap-2 p-1.5 rounded-xl bg-slate-900/80 border border-white/10">
+          <div className="flex items-center gap-2 p-1 rounded-sm glass border border-white/10">
             <button
               onClick={() => setSelectedCategory('all')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all ${
+              className={`px-4 py-2 rounded-sm text-xs font-mono uppercase tracking-wider transition-all ${
                 selectedCategory === 'all'
-                  ? 'bg-cyan-500 text-slate-950 font-bold'
-                  : 'text-slate-400 hover:text-white'
+                  ? 'bg-white text-black font-bold'
+                  : 'text-gray-400 hover:text-white'
               }`}
             >
               ALL
@@ -61,10 +54,10 @@ export const Skills: React.FC = () => {
               <button
                 key={cat.id}
                 onClick={() => setSelectedCategory(cat.id)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all ${
+                className={`px-4 py-2 rounded-sm text-xs font-mono uppercase tracking-wider transition-all ${
                   selectedCategory === cat.id
-                    ? 'bg-cyan-500 text-slate-950 font-bold'
-                    : 'text-slate-400 hover:text-white'
+                    ? 'bg-white text-black font-bold'
+                    : 'text-gray-400 hover:text-white'
                 }`}
               >
                 {cat.title}
@@ -83,12 +76,12 @@ export const Skills: React.FC = () => {
               <div
                 key={category.id}
                 id={`skill-category-${category.id}`}
-                className="rounded-3xl glass-panel border border-white/10 hover:border-cyan-500/30 p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 group"
+                className="rounded-2xl glass border border-white/10 hover:border-cyan-400/40 p-7 sm:p-8 flex flex-col justify-between transition-all duration-200 group"
               >
                 <div>
                   {/* Category Header */}
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="p-2 rounded-xl bg-slate-900 border border-white/10 text-cyan-400 group-hover:border-cyan-400/50 group-hover:bg-cyan-500/10 transition-colors">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="p-2.5 rounded-lg bg-white/5 border border-white/10 text-cyan-400">
                       <Icon className="w-5 h-5" />
                     </div>
                     <div>
@@ -98,7 +91,7 @@ export const Skills: React.FC = () => {
                     </div>
                   </div>
 
-                  <p className="text-xs text-slate-400 mb-6 font-light leading-relaxed">
+                  <p className="text-xs text-gray-400 mb-6 font-normal leading-relaxed">
                     {category.subtitle}
                   </p>
 
@@ -107,17 +100,17 @@ export const Skills: React.FC = () => {
                     {category.skills.map((skill, sIdx) => (
                       <div
                         key={sIdx}
-                        className="flex items-center justify-between p-2.5 rounded-xl bg-slate-900/60 border border-white/5 hover:border-cyan-500/30 hover:bg-slate-900 transition-all group/item"
+                        className="flex items-center justify-between p-3 rounded-sm bg-white/5 border border-white/10 hover:border-cyan-400/40 transition-all group/item"
                       >
                         <div className="flex items-center gap-2.5">
-                          <span className="w-1.5 h-1.5 rounded-full bg-cyan-400/70 group-hover/item:scale-125 transition-transform" />
-                          <span className="text-xs font-semibold text-slate-200 font-display group-hover/item:text-white">
+                          <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
+                          <span className="text-xs font-semibold text-gray-200 font-display group-hover/item:text-white">
                             {skill.name}
                           </span>
                         </div>
 
                         {skill.tag && (
-                          <span className="font-mono text-[10px] text-slate-400 px-2 py-0.5 rounded bg-white/5 border border-white/5 group-hover/item:text-cyan-300">
+                          <span className="font-mono text-[9px] uppercase tracking-wider text-gray-400 px-2.5 py-0.5 rounded-sm bg-white/5 border border-white/10 group-hover/item:text-cyan-300">
                             {skill.tag}
                           </span>
                         )}
@@ -127,9 +120,9 @@ export const Skills: React.FC = () => {
                 </div>
 
                 {/* Footer of card */}
-                <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between font-mono text-[10px] text-slate-500">
+                <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between font-mono text-[9px] uppercase tracking-widest text-gray-500">
                   <span>{category.skills.length} CORE MODULES</span>
-                  <span className="text-cyan-400">READY</span>
+                  <span className="text-cyan-400 font-bold">READY</span>
                 </div>
               </div>
             );

@@ -44,27 +44,19 @@ export const LiveClock: React.FC<LiveClockProps> = ({ variant = 'badge', classNa
     return (
       <div
         id="hero-live-clock"
-        className={`inline-flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 px-4 py-2.5 rounded-xl glass-panel border border-cyan-500/20 text-xs text-slate-300 ${className}`}
+        className={`glass px-4 py-2 rounded-xl flex items-center gap-3 text-xs text-white ${className}`}
       >
         <div className="flex items-center gap-2">
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
-          </span>
-          <span className="font-mono uppercase tracking-widest text-[10px] text-cyan-400 font-semibold">
-            LOCAL TIME • LIVE
+          <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
+          <span className="font-mono uppercase tracking-[0.2em] text-[9px] text-cyan-400 font-bold">
+            Live
           </span>
         </div>
 
-        <div className="flex items-center gap-2 font-mono">
-          <span className="text-slate-100 font-semibold tracking-wider text-sm bg-slate-900/60 px-2 py-0.5 rounded border border-white/5">
-            {formattedHours}:{formattedMinutes}:
-            <span className="text-cyan-400 transition-all duration-300">{formattedSeconds}</span>{' '}
-            <span className="text-[11px] text-orange-400">{ampm}</span>
-          </span>
-          <span className="hidden md:inline text-slate-400 text-[11px] border-l border-white/10 pl-2">
-            {formattedDate}
-          </span>
+        <div className="font-mono text-xs tracking-wider text-cyan-400 font-medium border-l border-white/10 pl-3">
+          {formattedHours}:{formattedMinutes}:
+          <span className="text-white">{formattedSeconds}</span>{' '}
+          <span className="text-[10px] text-orange-400">{ampm}</span>
         </div>
       </div>
     );
@@ -72,26 +64,16 @@ export const LiveClock: React.FC<LiveClockProps> = ({ variant = 'badge', classNa
 
   if (variant === 'footer') {
     return (
-      <div id="footer-live-clock" className={`flex flex-col gap-1.5 ${className}`}>
-        <div className="flex items-center gap-2">
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-          </span>
-          <span className="font-mono text-[10px] tracking-widest text-slate-400 uppercase font-medium">
-            LOCAL TIME • LIVE
-          </span>
+      <div id="footer-live-clock" className={`glass px-6 py-4 rounded-xl flex flex-col items-end min-w-[220px] ${className}`}>
+        <span className="text-[9px] tracking-[0.3em] uppercase opacity-50 mb-1 font-bold text-slate-300">
+          Local Time • Live
+        </span>
+        <div id="clock" className="text-xl font-mono tracking-wider font-medium text-cyan-400">
+          {formattedHours}:{formattedMinutes}:{formattedSeconds} {ampm}
         </div>
-        <div className="font-mono text-sm font-medium text-slate-200 flex items-center gap-2">
-          <span>
-            {formattedHours}:{formattedMinutes}:
-            <span className="text-cyan-400">{formattedSeconds}</span> {ampm}
-          </span>
-          <span className="text-[11px] text-slate-400 bg-white/5 px-2 py-0.5 rounded border border-white/5">
-            {timezone}
-          </span>
+        <div id="date" className="text-[10px] uppercase tracking-widest opacity-40 mt-1 text-slate-300">
+          {formattedDate}
         </div>
-        <div className="text-xs text-slate-400">{formattedDate}</div>
       </div>
     );
   }
@@ -100,16 +82,12 @@ export const LiveClock: React.FC<LiveClockProps> = ({ variant = 'badge', classNa
   return (
     <div
       id="navbar-live-clock"
-      className={`hidden lg:flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-slate-900/70 border border-white/10 text-xs font-mono text-slate-300 shadow-inner ${className}`}
+      className={`hidden lg:flex items-center gap-2.5 px-3.5 py-1.5 rounded-full glass text-xs font-mono text-slate-200 ${className}`}
     >
-      <span className="relative flex h-1.5 w-1.5">
-        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-        <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-cyan-400"></span>
-      </span>
-      <Clock className="w-3.5 h-3.5 text-cyan-400/80" />
-      <span className="tracking-wider text-slate-200 font-medium">
-        {formattedHours}:{formattedMinutes}:<span className="text-cyan-400">{formattedSeconds}</span>{' '}
-        <span className="text-[10px] text-orange-400">{ampm}</span>
+      <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
+      <span className="tracking-wider text-cyan-400 font-medium">
+        {formattedHours}:{formattedMinutes}:<span className="text-white">{formattedSeconds}</span>{' '}
+        <span className="text-[10px] text-orange-400 font-semibold">{ampm}</span>
       </span>
     </div>
   );

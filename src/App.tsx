@@ -17,7 +17,11 @@ import { Footer } from './components/Footer';
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-[#030712] text-slate-100 selection:bg-cyan-500/30 selection:text-cyan-200 relative overflow-x-hidden">
+    <div className="min-h-screen bg-[#02040a] text-white selection:bg-cyan-400/30 selection:text-cyan-200 relative overflow-x-hidden">
+      {/* Subtle Grain & Ambient Cinematic Lighting */}
+      <div className="grain"></div>
+      <div className="cinematic-bg fixed inset-0 pointer-events-none z-0"></div>
+
       {/* Desktop Custom Fluid Cursor */}
       <CustomCursor />
 
@@ -25,7 +29,7 @@ export default function App() {
       <Navbar />
 
       {/* Main Sections Hierarchy */}
-      <main id="main-content">
+      <main id="main-content" className="relative z-10">
         <Hero />
         <About />
         <Projects />
@@ -35,7 +39,7 @@ export default function App() {
         <Contact />
       </main>
 
-      {/* Cinematic Footer */}
+      {/* Cinematic Minimal Footer */}
       <Footer />
     </div>
   );

@@ -1,5 +1,5 @@
-import React from 'react';
-import { Sparkles, Terminal, Compass, Layers, Bot, Cpu, Smartphone, Wrench, Globe, ShieldCheck } from 'lucide-react';
+import React, { useMemo } from 'react';
+import { Sparkles, Terminal, Compass, Layers, Bot, Cpu, Smartphone, Wrench, Globe, ShieldCheck, BookOpen, Clock } from 'lucide-react';
 import { PERSONAL_INFO } from '../data/portfolio';
 
 const INTEREST_CARDS = [
@@ -38,31 +38,58 @@ const INTEREST_CARDS = [
 ];
 
 export const About: React.FC = () => {
-  return (
-    <section id="about" className="relative py-24 bg-[#030712] overflow-hidden">
-      {/* Background ambient lighting */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute top-1/2 -left-32 w-96 h-96 bg-cyan-600/10 rounded-full blur-[140px]" />
-        <div className="absolute top-1/3 -right-32 w-96 h-96 bg-orange-600/10 rounded-full blur-[140px]" />
-      </div>
+  // Dynamically calculate the reading time and word count for the entire About section
+  const readingStats = useMemo(() => {
+    const allText = [
+      PERSONAL_INFO.about.heading,
+      PERSONAL_INFO.about.subheading,
+      ...PERSONAL_INFO.about.bio,
+      ...PERSONAL_INFO.about.interests,
+      ...PERSONAL_INFO.about.focusMetrics.flatMap((m) => [m.label, m.value, m.description]),
+      ...INTEREST_CARDS.flatMap((c) => [c.title, c.description, c.badge]),
+    ].join(' ');
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
+    const words = allText.trim().split(/\s+/).filter(Boolean).length;
+    // Standard adult reading speed is ~200-250 words per minute
+    const wordsPerMinute = 200;
+    const minutes = Math.max(1, Math.ceil(words / wordsPerMinute));
+
+    return { words, minutes };
+  }, []);
+
+  return (
+    <section id="about" className="relative py-24 bg-[#02040a] overflow-hidden">
+      <div className="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 z-10">
         
         {/* Section Header */}
-        <div className="flex flex-col items-start gap-3 mb-16">
-          <div className="flex items-center gap-2 px-3 py-1 rounded-full glass-panel-subtle border border-cyan-500/30">
-            <Compass className="w-3.5 h-3.5 text-cyan-400" />
-            <span className="font-mono text-[11px] uppercase tracking-widest text-cyan-300 font-semibold">
-              ABOUT THE DEVELOPER
-            </span>
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+          <div className="flex flex-col items-start gap-2">
+            <div className="flex items-center space-x-2 text-[10px] uppercase tracking-[0.3em] font-mono text-cyan-400 font-bold mb-1">
+              <div className="w-1.5 h-1.5 rounded-full bg-cyan-400"></div>
+              <span>About The Developer</span>
+            </div>
+            
+            <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-white font-display">
+              {PERSONAL_INFO.about.heading}
+            </h2>
+            <p className="text-sm tracking-wide text-gray-400 font-mono">
+              {PERSONAL_INFO.about.subheading}
+            </p>
           </div>
-          
-          <h2 className="text-3xl sm:text-5xl font-black font-display tracking-tight text-white uppercase">
-            {PERSONAL_INFO.about.heading}
-          </h2>
-          <p className="font-mono text-xs uppercase tracking-widest text-slate-400 font-medium">
-            {PERSONAL_INFO.about.subheading}
-          </p>
+
+          {/* Reading Time Badge */}
+          <div
+            id="about-reading-time"
+            className="flex items-center gap-3 px-4 py-2 rounded-sm glass border border-white/10 text-xs font-mono text-gray-300 w-fit"
+          >
+            <div className="flex items-center gap-1.5 text-cyan-400">
+              <BookOpen className="w-3.5 h-3.5" />
+              <span className="uppercase tracking-wider font-semibold">Reading Time:</span>
+            </div>
+            <span className="text-white font-bold">{readingStats.minutes} min read</span>
+            <span className="text-gray-500">•</span>
+            <span className="text-gray-400">{readingStats.words} words</span>
+          </div>
         </div>
 
         {/* Top Grid: Bio narrative + Focal Metrics */}
@@ -70,19 +97,8 @@ export const About: React.FC = () => {
           
           {/* Bio Narrative */}
           <div className="lg:col-span-7 flex flex-col gap-5">
-            <div className="p-6 sm:p-8 rounded-2xl glass-panel border border-white/10 relative overflow-hidden">
-              <div className="absolute top-0 right-0 p-4 opacity-10">
-                <Terminal className="w-24 h-24 text-white" />
-              </div>
-
-              <div className="flex items-center gap-2 mb-4">
-                <span className="w-2.5 h-2.5 rounded-full bg-cyan-400"></span>
-                <h3 className="font-display text-lg font-bold text-white tracking-wide">
-                  The Journey & Philosophy
-                </h3>
-              </div>
-
-              <div className="space-y-4 text-slate-300 text-sm sm:text-base leading-relaxed font-light">
+            <div className="p-8 rounded-2xl glass border border-white/10 relative overflow-hidden">
+              <div className="space-y-4 text-gray-300 text-sm sm:text-base leading-relaxed font-normal">
                 {PERSONAL_INFO.about.bio.map((paragraph, idx) => (
                   <p key={idx}>{paragraph}</p>
                 ))}
@@ -90,14 +106,14 @@ export const About: React.FC = () => {
 
               {/* Interests tag cloud */}
               <div className="pt-6 mt-6 border-t border-white/10">
-                <span className="block font-mono text-[11px] uppercase tracking-widest text-slate-400 mb-3 font-medium">
-                  KEY AREAS OF EXPLORATION:
+                <span className="block font-mono text-[10px] uppercase tracking-[0.25em] text-gray-400 mb-3 font-bold">
+                  KEY AREAS OF EXPLORATION //
                 </span>
                 <div className="flex flex-wrap gap-2">
                   {PERSONAL_INFO.about.interests.map((interest, i) => (
                     <span
                       key={i}
-                      className="px-3 py-1 rounded-md text-xs font-mono bg-slate-900/80 border border-white/10 text-slate-300 hover:border-cyan-400/40 hover:text-cyan-300 transition-colors"
+                      className="px-3.5 py-1 rounded-sm text-xs font-mono bg-white/5 border border-white/10 text-gray-300 hover:border-cyan-400/50 hover:text-white transition-colors"
                     >
                       {interest}
                     </span>
@@ -113,17 +129,17 @@ export const About: React.FC = () => {
               <div
                 key={idx}
                 id={`focus-metric-${idx}`}
-                className="p-5 rounded-2xl glass-panel-interactive border border-white/10 flex flex-col justify-between h-full group"
+                className="p-6 rounded-2xl glass border border-white/10 flex flex-col justify-between h-full group hover:border-cyan-400/30 transition-all duration-200"
               >
                 <div>
-                  <div className="font-mono text-[10px] uppercase tracking-widest text-orange-400 font-semibold mb-2">
+                  <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-cyan-400 font-bold mb-2">
                     {item.label}
                   </div>
                   <div className="font-display text-xl sm:text-2xl font-bold text-white group-hover:text-cyan-300 transition-colors leading-tight">
                     {item.value}
                   </div>
                 </div>
-                <p className="text-xs text-slate-400 mt-4 border-t border-white/5 pt-3 leading-snug">
+                <p className="text-xs text-gray-400 mt-4 border-t border-white/10 pt-3 leading-snug">
                   {item.description}
                 </p>
               </div>
@@ -135,7 +151,7 @@ export const About: React.FC = () => {
         {/* Pillars / Technical Disciplines Grid */}
         <div>
           <div className="flex items-center justify-between mb-6">
-            <span className="font-mono text-xs uppercase tracking-widest text-slate-400 font-semibold flex items-center gap-2">
+            <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-gray-400 font-bold flex items-center gap-2">
               <Layers className="w-4 h-4 text-cyan-400" />
               <span>TECHNICAL DOMAINS & INTERESTS</span>
             </span>
@@ -148,14 +164,14 @@ export const About: React.FC = () => {
                 <div
                   key={idx}
                   id={`interest-card-${idx}`}
-                  className={`p-5 rounded-2xl glass-panel-interactive border ${card.borderColor} flex flex-col justify-between group h-full`}
+                  className="p-6 rounded-2xl glass border border-white/10 flex flex-col justify-between group h-full hover:border-cyan-400/40 transition-all duration-200"
                 >
                   <div>
-                    <div className="flex items-center justify-between mb-4">
-                      <div className={`p-2.5 rounded-xl bg-slate-900/80 border border-white/10 ${card.color} shadow-sm`}>
+                    <div className="flex items-center justify-between mb-5">
+                      <div className="p-2.5 rounded-lg bg-white/5 border border-white/10 text-cyan-400">
                         <Icon className="w-5 h-5" />
                       </div>
-                      <span className="font-mono text-[10px] text-slate-400 uppercase px-2 py-0.5 rounded bg-white/5 border border-white/5">
+                      <span className="font-mono text-[9px] text-gray-400 uppercase tracking-widest px-2.5 py-1 rounded-sm bg-white/5 border border-white/10">
                         {card.badge}
                       </span>
                     </div>
@@ -164,14 +180,14 @@ export const About: React.FC = () => {
                       {card.title}
                     </h4>
 
-                    <p className="text-xs text-slate-400 leading-relaxed">
+                    <p className="text-xs text-gray-400 leading-relaxed">
                       {card.description}
                     </p>
                   </div>
 
-                  <div className="mt-4 pt-3 border-t border-white/5 flex items-center justify-between">
-                    <span className="font-mono text-[10px] text-slate-500">ACTIVE DEV</span>
-                    <span className="w-1.5 h-1.5 rounded-full bg-cyan-400/80"></span>
+                  <div className="mt-5 pt-3 border-t border-white/10 flex items-center justify-between">
+                    <span className="font-mono text-[9px] text-gray-500 uppercase tracking-widest">ACTIVE DEV</span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
                   </div>
                 </div>
               );

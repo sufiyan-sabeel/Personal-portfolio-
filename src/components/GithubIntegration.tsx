@@ -71,28 +71,21 @@ export const GithubIntegration: React.FC = () => {
   }, []);
 
   return (
-    <section id="github" className="relative py-24 bg-[#030712] overflow-hidden">
-      {/* Background glow */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute top-1/3 -right-20 w-96 h-96 bg-blue-600/10 rounded-full blur-[140px]" />
-      </div>
-
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
+    <section id="github" className="relative py-24 bg-[#02040a] overflow-hidden">
+      <div className="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 z-10">
         
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
           <div>
-            <div className="flex items-center gap-2 px-3 py-1 rounded-full glass-panel-subtle border border-cyan-500/30 w-fit mb-3">
-              <Github className="w-3.5 h-3.5 text-cyan-400" />
-              <span className="font-mono text-[11px] uppercase tracking-widest text-cyan-300 font-semibold">
-                OPEN SOURCE & CODE ACTIVITY
-              </span>
+            <div className="flex items-center space-x-2 text-[10px] uppercase tracking-[0.3em] font-mono text-cyan-400 font-bold mb-1">
+              <div className="w-1.5 h-1.5 rounded-full bg-cyan-400"></div>
+              <span>Open Source & Code Activity</span>
             </div>
             
-            <h2 className="text-3xl sm:text-5xl font-black font-display tracking-tight text-white uppercase">
+            <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-white font-display">
               GITHUB ACTIVITY
             </h2>
-            <p className="font-mono text-xs uppercase tracking-widest text-slate-400 mt-2">
+            <p className="font-mono text-xs uppercase tracking-widest text-gray-400 mt-2">
               CONNECTED PROFILE: @{PERSONAL_INFO.githubUsername}
             </p>
           </div>
@@ -102,11 +95,11 @@ export const GithubIntegration: React.FC = () => {
             target="_blank"
             rel="noreferrer"
             id="github-profile-btn"
-            className="group inline-flex items-center gap-2.5 px-6 py-3 rounded-xl font-mono text-xs font-bold text-white bg-slate-900 hover:bg-slate-800 border border-white/20 hover:border-cyan-400/50 shadow-md transition-all duration-200"
+            className="glass px-6 py-3 rounded-sm font-mono text-xs font-bold uppercase tracking-wider text-white hover:bg-white hover:text-black border border-white/20 transition-all duration-200 inline-flex items-center gap-2.5"
           >
             <Github className="w-4 h-4 text-cyan-400" />
-            <span>VIEW GITHUB PROFILE</span>
-            <ExternalLink className="w-3.5 h-3.5 text-slate-400 group-hover:text-cyan-300 group-hover:translate-x-0.5 transition-transform" />
+            <span>View GitHub Profile</span>
+            <ExternalLink className="w-3.5 h-3.5" />
           </a>
         </div>
 
@@ -116,11 +109,11 @@ export const GithubIntegration: React.FC = () => {
             Array.from({ length: 3 }).map((_, i) => (
               <div
                 key={i}
-                className="h-44 rounded-2xl glass-panel border border-white/5 animate-pulse p-6"
+                className="h-44 rounded-2xl glass border border-white/5 animate-pulse p-6"
               >
-                <div className="h-4 w-2/3 bg-slate-800 rounded mb-4"></div>
-                <div className="h-3 w-full bg-slate-800/60 rounded mb-2"></div>
-                <div className="h-3 w-4/5 bg-slate-800/60 rounded"></div>
+                <div className="h-4 w-2/3 bg-white/10 rounded mb-4"></div>
+                <div className="h-3 w-full bg-white/5 rounded mb-2"></div>
+                <div className="h-3 w-4/5 bg-white/5 rounded"></div>
               </div>
             ))
           ) : (
@@ -131,7 +124,7 @@ export const GithubIntegration: React.FC = () => {
                 target="_blank"
                 rel="noreferrer"
                 id={`github-repo-${repo.name}`}
-                className="group p-6 rounded-2xl glass-panel-interactive border border-white/10 hover:border-cyan-500/40 flex flex-col justify-between transition-all duration-300"
+                className="group p-6 rounded-2xl glass border border-white/10 hover:border-cyan-400/40 flex flex-col justify-between transition-all duration-200"
               >
                 <div>
                   <div className="flex items-center justify-between gap-2 mb-3">
@@ -141,29 +134,29 @@ export const GithubIntegration: React.FC = () => {
                         {repo.name}
                       </span>
                     </div>
-                    <span className="font-mono text-[10px] text-slate-500 uppercase px-2 py-0.5 rounded bg-white/5">
+                    <span className="font-mono text-[9px] uppercase tracking-wider text-gray-400 px-2 py-0.5 rounded-sm bg-white/5 border border-white/10">
                       Public
                     </span>
                   </div>
 
-                  <p className="text-xs text-slate-400 line-clamp-2 leading-relaxed mb-4 font-light">
+                  <p className="text-xs text-gray-300 line-clamp-2 leading-relaxed mb-4 font-normal">
                     {repo.description || 'Repository maintained by Umaiz Sufiyan.'}
                   </p>
                 </div>
 
-                <div className="flex items-center justify-between pt-4 border-t border-white/5 text-[11px] font-mono text-slate-400">
+                <div className="flex items-center justify-between pt-4 border-t border-white/10 text-[11px] font-mono text-gray-400">
                   <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-orange-400"></span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
                     <span>{repo.language || 'Code'}</span>
                   </div>
 
-                  <div className="flex items-center gap-3 text-slate-400">
+                  <div className="flex items-center gap-3 text-gray-400">
                     <span className="flex items-center gap-1">
-                      <Star className="w-3 h-3 text-yellow-500/80" />
+                      <Star className="w-3 h-3 text-yellow-400" />
                       {repo.stargazers_count}
                     </span>
                     <span className="flex items-center gap-1">
-                      <GitFork className="w-3 h-3 text-slate-500" />
+                      <GitFork className="w-3 h-3 text-gray-400" />
                       {repo.forks_count}
                     </span>
                   </div>
@@ -174,7 +167,7 @@ export const GithubIntegration: React.FC = () => {
         </div>
 
         {/* Bottom Status bar */}
-        <div className="flex flex-wrap items-center justify-between gap-4 p-4 rounded-xl glass-panel-subtle border border-white/5 text-xs font-mono text-slate-400">
+        <div className="flex flex-wrap items-center justify-between gap-4 p-4 rounded-sm glass border border-white/10 text-xs font-mono text-gray-400">
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
             <span>Source code & repositories hosted on GitHub</span>
@@ -182,7 +175,7 @@ export const GithubIntegration: React.FC = () => {
 
           <button
             onClick={fetchGithubRepos}
-            className="flex items-center gap-1.5 hover:text-cyan-300 transition-colors text-[11px]"
+            className="flex items-center gap-1.5 hover:text-cyan-300 transition-colors text-[11px] uppercase tracking-wider"
             title="Refresh GitHub Repositories"
           >
             <RefreshCw className={`w-3 h-3 ${loading ? 'animate-spin' : ''}`} />
